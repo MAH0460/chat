@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+
 const port = 8082;
 const url =
   "mongodb+srv://Harshu:Harshu%4060@cluster0.ednubnx.mongodb.net/test";
@@ -67,7 +68,11 @@ app.post("/sendMessage", (req, res) => {
   try {
     client.connect(url, function (err, db) {
       if (err) throw err;
-      const date = new Date();
+      const date = new Date().toLocaleTimeString("fr-FR", {
+        timeZone: "Asia/Kolkata",
+        hour: "numeric",
+        minute: "numeric",
+      });
 
       dbo = db.db("Chat").collection("Message");
       dbo.deleteMany({
@@ -76,7 +81,7 @@ app.post("/sendMessage", (req, res) => {
       data = {
         name: req.body.user.toLowerCase(),
         message: req.body.message,
-        time: date.getHours() + ":" + date.getMinutes(),
+        time: date,
         timestamp: Date.now(),
       };
       dbo.insertOne(data, function (err, result) {
