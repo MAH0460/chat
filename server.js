@@ -27,7 +27,7 @@ const insert = (data) => {
       const dbo = db.db("Chat").collection("Users");
       await dbo.insertOne(data, function (err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         db.close();
       });
     } catch (e) {
@@ -46,7 +46,7 @@ app.post("/createUser", (req, res) => {
       };
       await dbo.find(query).toArray(function (err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         db.close();
         if (result.length === 0) {
           const myobj = { name: req.body.name.toLowerCase(), role: "user" };
@@ -81,7 +81,7 @@ app.post("/sendMessage", (req, res) => {
       };
       dbo.insertOne(data, function (err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         db.close();
         res.send(true);
       });
