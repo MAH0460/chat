@@ -139,7 +139,7 @@ app.post("/getMessages", async (req, res) => {
         }
         if (number < req.body.skip) {
           db.close();
-          res.send(-1);
+          res.send("failed");
           return;
         }
         dbo
