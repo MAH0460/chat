@@ -18,9 +18,9 @@ app.use(
 app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads/");
-  },
+  // destination: (req, file, cb) => {
+  //   cb(null, "./uploads/");
+  // },
   filename: (req, file, cb) => {
     const fileName = file.originalname.toLowerCase().split(" ").join("-");
     cb(null, fileName + "-" + Date.now());
